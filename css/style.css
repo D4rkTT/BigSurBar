@@ -1,0 +1,167 @@
+@import url("../fonts/stylesheet.css");
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    width: 100vw;
+    height: 100vh;
+    /*background: url("../img/back.jpg");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#bar {
+    background-color: rgba(0, 0, 0, 0.239);
+    width: 100%;
+    height: 35px;
+    backdrop-filter: blur(45px);
+    -webkit-backdrop-filter: blur(45px);
+    mix-blend-mode: color-burn;
+}
+.right-section {
+    float: right;
+    list-style-type: none;
+    display: flex;
+}
+.right-section li {
+    padding: 7px;
+    margin-right: 2px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    color: white;
+}
+.left-section {
+    float: left;
+    list-style-type: none;
+    display: flex;
+}
+.left-section li {
+    margin-left: 15px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+    position: relative;
+    z-index: 999;
+    padding: 8px;
+}
+li:hover {
+    background-color:  rgba(255, 255, 255, 0.150);
+}
+li:focus {
+    background-color:  rgba(206, 192, 255, 0.226);
+}
+li {
+    font-family: 'SF Pro Display';
+    font-weight: 400;
+}
+.firstItemRight {
+    margin-right: 8px !important;
+}
+#itemIcon {
+    float: left;
+    display: flex;
+    margin-top: 3px;
+}
+.itemText {
+    width: auto;
+    text-align: right;
+    margin-right: 5px;
+    font-size: 13px;
+    float: left;
+    margin-top: 3px;
+    display: block !important;
+}
+.mainText {
+    font-size: 16px;
+    margin-top: 0px !important;
+}
+.Bt-Icon-Inner {
+    background: url(../img/inner.svg);
+    width: 25px;
+    height: 11px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    margin-left: 3px;
+    margin-top: 3px;
+    
+}
+.isCharging {
+    animation: Charging 2s infinite;
+}
+.Bt-Icon-Outer {
+    background: url(../img/outer.svg);
+    width: 35px;
+    height: 17px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+}
+.cellular-icon {
+    background: url(../img/signal4.png);
+    width: 25px;
+    height: 25px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    margin-top: -6px;
+}
+.wifi-icon {
+    background: url(../img/wifi4.png);
+    width: 25px;
+    height: 25px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    margin-top: -6px;
+}
+.bt-icon {
+    background: url(../img/bluetooth.png);
+    width: 25px;
+    height: 25px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    margin-top: -6px;
+}
+.apple-icon {
+    background: url(../img/apple.svg);
+    width: 18px;
+    height: 18px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    margin-top: -4px;
+}
+.music-icon {
+    width: 25px;
+    height: 25px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    margin-top: -5px;
+}
+.mplay {
+    background: url(../img/play.png);
+}
+.mpause {
+    background: url(../img/pause.png);
+}
+.rightText {
+    float: right !important;
+    margin-right: -1px;
+    margin-left: 4px;
+}
+.semibold {
+    font-weight: 500;
+}
+.max85 {
+    max-width: 85px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+@keyframes Charging {
+    from {width: 0;}
+    to {width: 25px;}
+  }
