@@ -13,6 +13,7 @@ body {
 #bar {
     background-color: rgba(0, 0, 0, 0.239);
     width: 100%;
+    min-width: 580px;
     height: 35px;
     backdrop-filter: blur(45px);
     -webkit-backdrop-filter: blur(45px);
@@ -45,9 +46,6 @@ body {
     z-index: 999;
     padding: 8px;
 }
-li:hover {
-    background-color:  rgba(255, 255, 255, 0.150);
-}
 li:focus {
     background-color:  rgba(206, 192, 255, 0.226);
 }
@@ -70,7 +68,7 @@ li {
     font-size: 13px;
     float: left;
     margin-top: 3px;
-    display: block !important;
+    /*display: block !important;*/
 }
 .mainText {
     font-size: 16px;
@@ -143,6 +141,14 @@ li {
 .mpause {
     background: url(../img/pause.png);
 }
+.vol-icon {
+    background: url(../img/vol.png);
+    width: 25px;
+    height: 25px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    margin-top: -6px;
+}
 .rightText {
     float: right !important;
     margin-right: -1px;
@@ -161,6 +167,52 @@ a {
     color: white;
     text-decoration: none;
 }
+.range-slider{
+    margin-top: 0px !important;
+}
+.range-slider__range {
+    -webkit-appearance: none;
+    height: 3px;
+    border-radius: 6px;
+    background: #fff;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    width: 100px;
+}
+.range-slider__range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+            appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-transition: background 0.15s ease-in-out;
+    transition: background 0.15s ease-in-out;
+}
+
+.range-slider__range::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #535353;
+    border: 0;
+    cursor: pointer;
+    -moz-transition: background 0.15s ease-in-out;
+    transition: background 0.15s ease-in-out;
+}
+
+::-moz-range-track {
+    background: #d7dcdf;
+    border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer {
+    border: 0;
+}
+
 @keyframes Charging {
     from {width: 0;}
     to {width: 25px;}

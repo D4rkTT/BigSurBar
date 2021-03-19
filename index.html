@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="js/emulation.js"></script>
   <meta charset="utf-8">
-  <title>BigSurBar</title>
+  <title>Background | MacOSBar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" media="screen" href="css/style.css">
+  <link rel="stylesheet" media="screen" href="css/jquery.mobile.structure-1.4.5.min.css">
 </head>
 <body>
     <div id="bar">
         <ul class="right-section">
             
+            <li id="vol-item" style="display: block;" >
+                <div class="itemText rightText range-slider" style="display: none !important;">
+                    <input class="range-slider__range" type="ranges" value="0" min="0" max="100">
+                </div>
+                <div id="itemIcon">
+                    <div class="vol-icon" id="vol-icon"></div>
+                </div>
+            </li>
 
             <li id="music-item" onclick="api.media.togglePlayPause();" xui-hide="media.isStopped">
                 <span class="itemText rightText semibold max85" id="music-Name">Music Name</span>
@@ -53,7 +63,7 @@
             <li id="DateNow" class="firstItemRight" style="display: none;">15/03/2021</li>
         </ul>
         <ul class="left-section">
-            <a href="https://twitter.com/_DarkT_">
+            <a href="#">
             <li>
                 <span class="itemText mainText rightText semibold" id="apple-icon">BigSurBar</span>
                 <div id="itemIcon">
@@ -63,6 +73,8 @@
 
         </ul>
     </div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/jquery.mobile-1.5.0-alpha.1.min.js"></script>
 <script>
     function updateTime(){
         var date = new Date();
@@ -110,58 +122,121 @@
         });
         api.comms.observeData(function (newData) {
             if(newData.telephony.airplaneMode){
-                document.getElementById("cellular-signal").style.display = "block";
+                $("#cellular-signal").show();
                 document.getElementById("cellular-type").innerText = "";
                 document.getElementById("cellular-icon").style.background = "url(img/airplane.png)";
             }else {
                 if(newData.telephony.type != "" && newData.telephony.operator != ""){
                 // Device supported cellular
-                document.getElementById("cellular-signal").style.display = "block";
+                $("#cellular-signal").show();
                 document.getElementById("cellular-type").innerText = newData.telephony.operator + " " + newData.telephony.type;
                 document.getElementById("cellular-icon").style.background = "url(img/signal" + newData.telephony.bars.toString() +  ".png)";
                 }else{
-                    document.getElementById("cellular-signal").style.display = "none";
+                    $("#cellular-signal").hide();
                 }
             }
             
             if(newData.wifi.enabled !== false && newData.wifi.ssid !== ""){
-                // Device supported cellular
-                document.getElementById("wifi-signal").style.display = "block";
+                $("#wifi-signal").show();
                 document.getElementById("wifi-SSID").innerText = newData.wifi.ssid;
                 document.getElementById("wifi-icon").style.background = "url(img/wifi" + (newData.wifi.bars) +  ".png)";
             }else{
-                document.getElementById("wifi-signal").style.display = "none";
+                $("#wifi-signal").hide();
             }
 
             if(newData.bluetooth.enabled !== false){
                 // Device supported cellular
-                document.getElementById("bt-signal").style.display = "block";
+                $("#bt-signal").show();
                 if(newData.bluetooth.devices.length > 0){
                     document.getElementById("bt-icon").style.background = "url(img/bluetooth-connected.png)";
                 }else{
                     document.getElementById("bt-icon").style.background = "url(img/bluetooth.png)";
                 }
             }else{
-                document.getElementById("bt-signal").style.display = "none";
+                $("#bt-signal").hide();
             }
         });
-        api.media.observeData(function (newData) {
-            if(!newData.isStopped){
-                document.getElementById("music-Name").style.display = "block";
-                document.getElementById("music-Name").innerText = newData.nowPlaying.title;
-            }
-        });
+        
         
     setInterval(function(){
         updateTime();
     },1000)
     function showDate(){
-        document.getElementById("TimeNow").style.display = "none";
-        document.getElementById("DateNow").style.display = "block";
+        $("#TimeNow").hide();
+        $("#DateNow").fadeIn(150);
         setTimeout(function(){
-            document.getElementById("TimeNow").style.display = "block";
-            document.getElementById("DateNow").style.display = "none";
+            $("#TimeNow").fadeIn(150);
+            $("#DateNow").hide();
         }, 2000);
     }
+</script>
+<script>
+    $(document).ready(function() {
+        var isMuted, lastVol, HideVol;
+        // Cuz fkn jquary replace any range type to its fkn theme xD
+        $(".range-slider__range").attr("type", "range");
+
+        api.media.observeData(function (newData) {
+            $(".range-slider__range").val(newData.volume);
+            
+            if(!newData.isStopped){
+                document.getElementById("music-Name").style.display = "block";
+                document.getElementById("music-Name").innerText = newData.nowPlaying.title;
+            }
+        });
+
+        $(document).on('input', '.range-slider__range', function() {
+            
+            if($(this).val() > 0){
+                isMuted = false;
+                api.media.setVolume($(this).val());
+                document.getElementById("vol-icon").style.background = "url(img/vol.png)";
+            }else{
+                document.getElementById("vol-icon").style.background = "url(img/vol-muted.png)";
+            }
+            clearTimeout(HideVol);
+            HideVol = setTimeout(function(){
+                $(".range-slider").hide(200);
+            }, 5000);
+            
+        });
+        
+        $("#music-item").swiperight(function() {
+            // Previous
+            api.media.previousTrack();
+        });
+        $("#music-item").swipeleft(function() {
+            // Next
+            api.media.nextTrack();
+        });
+        
+        $("#vol-icon").click(function(){
+            if($(".range-slider").is(":visible")){
+                ToggelMute()
+            }else{
+                $(".range-slider").show(200);
+            }
+            clearTimeout(HideVol);
+            HideVol = setTimeout(function(){
+                $(".range-slider").hide(200);
+            }, 5000);
+        });
+        function ToggelMute(){
+            if(isMuted){
+                api.media.setVolume(lastVol);
+                isMuted = false;
+                document.getElementById("vol-icon").style.background = "url(img/vol.png)";
+            }else{
+                lastVol = api.media.volume;
+                api.media.setVolume(0);
+                isMuted = true;
+                document.getElementById("vol-icon").style.background = "url(img/vol-muted.png)";
+            }
+        }
+        
+
+    })
+    
+
 </script>
 </body></html>
