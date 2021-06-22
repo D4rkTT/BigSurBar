@@ -3,10 +3,12 @@
     padding: 0;
     margin: 0;
 }
+tab {
+    margin-left: 6px
+}
 body {
     width: 100vw;
     height: 100vh;
-    /*background: url("../img/back.jpg");*/
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -14,9 +16,9 @@ body {
     background-color: rgba(0, 0, 0, 0.239);
     width: 100%;
     min-width: 580px;
-    height: 35px;
-    backdrop-filter: blur(45px);
-    -webkit-backdrop-filter: blur(45px);
+    height: 30px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     mix-blend-mode: color-burn;
 }
 .right-section {
@@ -55,6 +57,8 @@ li {
 }
 .firstItemRight {
     margin-right: 8px !important;
+    margin-top: -1px;
+    font-size: 14px !important;
 }
 #itemIcon {
     float: left;
@@ -67,70 +71,58 @@ li {
     margin-right: 5px;
     font-size: 13px;
     float: left;
-    margin-top: 3px;
     /*display: block !important;*/
 }
 .mainText {
-    font-size: 16px;
-    margin-top: 0px !important;
+    font-size: 15px;
+    margin-top: -3px !important;
+    margin-left: 10px !important;
 }
-.Bt-Icon-Inner {
-    background: url(../img/inner.svg);
-    width: 25px;
-    height: 11px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: absolute;
-    margin-left: 3px;
-    margin-top: 3px;
-    
-}
-.isCharging {
-    animation: Charging 2s infinite;
-}
-.Bt-Icon-Outer {
-    background: url(../img/outer.svg);
-    width: 35px;
-    height: 17px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    opacity: 0.6;
-}
-.cellular-icon {
-    background: url(../img/signal4.png);
-    width: 25px;
-    height: 25px;
+.battery-icon {
+    background: url(../img/battery_5.png);
+    width: 30px;
+    height: 30px;
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    margin-top: -6px;
+    margin-top: -10px;
+    
+}
+
+.cellular-icon {
+    background: url(../img/signal4.png);
+    width: 20px;
+    height: 20px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    margin-top: -5px;
 }
 .wifi-icon {
     background: url(../img/wifi4.png);
-    width: 25px;
-    height: 25px;
+    width: 19px;
+    height: 19px;
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    margin-top: -6px;
+    margin-top: -5px;
 }
 .bt-icon {
     background: url(../img/bluetooth.png);
-    width: 25px;
-    height: 25px;
+    width: 16px;
+    height: 16px;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    margin-top: -3px;
+}
+.apple-icon {
+    background: url(../img/apple.svg);
+    width: 17px;
+    height: 17px;
     background-size: cover !important;
     background-repeat: no-repeat !important;
     margin-top: -6px;
 }
-.apple-icon {
-    background: url(../img/apple.svg);
-    width: 18px;
-    height: 18px;
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    margin-top: -4px;
-}
 .music-icon {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     background-size: cover !important;
     background-repeat: no-repeat !important;
     margin-top: -5px;
@@ -142,12 +134,12 @@ li {
     background: url(../img/pause.png);
 }
 .vol-icon {
-    background: url(../img/vol.png);
-    width: 25px;
-    height: 25px;
+    background: url(../img/vol2.png);
+    width: 18px;
+    height: 18px;
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    margin-top: -6px;
+    margin-top: -4px;
 }
 .rightText {
     float: right !important;
@@ -156,6 +148,12 @@ li {
 }
 .semibold {
     font-weight: 500;
+}
+.bold {
+    font-weight: 700;
+}
+bold {
+    font-weight: 600;
 }
 .max85 {
     max-width: 85px;
@@ -168,13 +166,13 @@ a {
     text-decoration: none;
 }
 .range-slider{
-    margin-top: 0px !important;
+    margin-top: -4px !important;
 }
 .range-slider__range {
     -webkit-appearance: none;
     height: 3px;
     border-radius: 6px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.5);
     outline: none;
     padding: 0;
     margin: 0;
@@ -212,8 +210,3 @@ input::-moz-focus-inner,
 input::-moz-focus-outer {
     border: 0;
 }
-
-@keyframes Charging {
-    from {width: 0;}
-    to {width: 25px;}
-  }

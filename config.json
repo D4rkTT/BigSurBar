@@ -1,4 +1,189 @@
 {
     "name": "BigSurBar",
-    "author": "DarkT -- Follow me => @_DarkT_"
+    "author": "DarkT -- Follow me => @_DarkT_",
+    "options" : [
+        {
+            "type": "title",
+            "text": "Battery Options"
+        },
+        {
+            "type": "switch",
+            "text": "Show Battery Icon",
+            "default": true,
+            "key": "batteryiconsw"
+        },
+        {
+            "type": "switch",
+            "text": "Show Battery Percentage",
+            "default": true,
+            "key": "batterypercsw"
+        },
+        {
+            "type": "gap"
+        },
+        {
+            "type": "title",
+            "text": "WiFi Options"
+        },
+        {
+            "type": "switch",
+            "text": "Show WiFi Icon",
+            "default": true,
+            "key": "wifiiconsw"
+        },
+        {
+            "type": "switch",
+            "text": "Show WiFi SSID",
+            "default": true,
+            "key": "wifissidsw"
+        },
+        {
+            "type": "gap"
+        },
+        {
+            "type": "title",
+            "text": "Cellular Options"
+        },
+        {
+            "type": "switch",
+            "text": "Show Cellular Icon",
+            "default": true,
+            "key": "cellulariconsw"
+        },
+        {
+            "type": "switch",
+            "text": "Show Cellular Name",
+            "default": true,
+            "key": "cellularnamesw"
+        },
+        {
+            "type": "comment",
+            "text": "If your device support cellular"
+        },
+        {
+            "type": "gap"
+        },
+        {
+            "type": "title",
+            "text": "Other Options"
+        },
+        {
+            "type": "switch",
+            "text": "Show Bluetooth Icon",
+            "default": true,
+            "key": "bluetoothiconsw"
+        },
+        {
+            "type": "switch",
+            "text": "Show Volume Controller",
+            "default": true,
+            "key": "volumesw"
+        },
+        {
+            "type": "switch",
+            "text": "Show Media Controller",
+            "default": true,
+            "key": "mediasw"
+        },
+        {
+            "type": "gap"
+        },
+        {
+            "type": "title",
+            "text": "Right and Left Texts"
+        },
+        {
+            "type": "text",
+            "text": "Right Text",
+            "default": "{datetime}",
+            "key": "rightText",
+            "placeholder": "{datetime}"
+        },
+        {
+            "type": "text",
+            "text": "Left Text",
+            "default": "Finder",
+            "key": "leftText",
+            "placeholder": "Finder"
+        },
+        {
+            "type": "comment",
+            "text": "you can use this replacement: {datetime}, {weather} or any text"
+        },
+
+
+        {
+            "type": "title",
+            "text": "Background Settings"
+        },
+        {
+            "type": "slider",
+            "min": 0.0,
+            "max": 10.0,
+            "text": "Blur",
+            "default": 5.0,
+            "key": "blurvar"
+        },
+        {
+            "type": "gap"
+        },
+        {"type": "page",
+            "text": "Credits",
+            "options": [
+                {
+                    "type": "title",
+                    "text": "BigSurBar By DarkT"
+                },
+                {
+                    "type" : "link",
+                    "text" : "Buy me a coffee",
+                    "url" : "https://www.buymeacoffee.com/darkt"
+                },
+                {
+                    "type" : "link",
+                    "text" : "Follow DarkT on Twitter",
+                    "url" : "https://twitter.com/_DarkT_"
+                },
+                {
+                    "type" : "link",
+                    "text" : "Follow DarkT on Github",
+                    "url" : "https://github.com/D4rkTT"
+                },
+                {
+                    "type":"gap"
+                },
+                {
+                    "type": "title",
+                    "text": "Thanks for Matt Clarke for XenHTML"
+                },
+                {
+                    "type" : "link",
+                    "text" : "Follow Matt Clarke on Twitter",
+                    "url" : "https://twitter.com/_Matchstic"
+                },
+                {
+                    "type" : "link",
+                    "text" : "Follow Matt Clarke on Github",
+                    "url" : "https://github.com/Matchstic"
+                }
+                ,
+                {
+                    "type":"gap"
+                },
+                {
+                    "type": "title",
+                    "text": "Thanks for Zerui Chen for XenLive"
+                },
+                {
+                    "type" : "link",
+                    "text" : "Follow Zerui Chen on Reddit",
+                    "url" : "https://www.reddit.com/user/Zerui18"
+                }
+                
+        
+        
+            ]
+                
+        }
+    ]
 }

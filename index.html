@@ -11,25 +11,27 @@
 <body>
     <div id="bar">
         <ul class="right-section">
-            
+            <li id="music-item">
+                <div onclick="api.media.togglePlayPause();" xui-hide="media.isStopped">
+                    <span class="itemText rightText semibold max85" id="music-name"></span>
+                    <div id="itemIcon" xui-show="media.isPlaying">
+                        <div class="music-icon mpause"></div>
+                    </div>
+                    <div id="itemIcon" xui-hide="media.isPlaying"> 
+                        <div class="music-icon mplay"></div>
+                    </div>
+                </div>
+            </li>
+
             <li id="vol-item" style="display: block;" >
                 <div class="itemText rightText range-slider" style="display: none !important;">
                     <input class="range-slider__range" type="ranges" value="0" min="0" max="100">
                 </div>
                 <div id="itemIcon">
-                    <div class="vol-icon" id="vol-icon"></div>
+                    <div class="vol-icon"></div>
                 </div>
             </li>
 
-            <li id="music-item" onclick="api.media.togglePlayPause();" xui-hide="media.isStopped">
-                <span class="itemText rightText semibold max85" id="music-Name">Music Name</span>
-                <div id="itemIcon" xui-show="media.isPlaying">
-                    <div class="music-icon mpause"></div>
-                </div>
-                <div id="itemIcon" xui-hide="media.isPlaying"> 
-                    <div class="music-icon mplay"></div>
-                </div>
-            </li>
 
             <li id="bt-signal" style="display: block;">
                 <div id="itemIcon">
@@ -38,34 +40,34 @@
             </li>
 
             <li id="wifi-signal" style="display: block;">
-                <span class="itemText rightText semibold max85" id="wifi-SSID">DarkT</span>
+                <span class="itemText rightText semibold max85" id="wifi-SSID"></span>
                 <div id="itemIcon">
-                    <div class="wifi-icon" id="wifi-icon"></div>
+                    <div class="wifi-icon"></div>
                 </div>
             </li>
-
+ 
             <li id="cellular-signal" style="display: none;">
                 <span class="itemText rightText semibold" id="cellular-type">4G</span>
                 <div id="itemIcon">
-                    <div class="cellular-icon" id="cellular-icon"></div>
+                    <div class="cellular-icon"></div>
                 </div>
             </li>
 
             <li>
-                <span class="itemText semibold" id="battery-percentage">100% </span>
+                <span class="itemText semibold" id="battery-percentage">100%</span>
                 <div id="itemIcon">
-                    <div class="Bt-Icon-Inner" id="battery-percentage-icon"></div>
-                    <div class="Bt-Icon-Outer"></div>
+                    <div class="battery-icon"></div>
                 </div>
             </li>
 
-            <li id="TimeNow" class="firstItemRight" onclick="showDate()" style="display: block;">Mon 0:00</li>
-            <li id="DateNow" class="firstItemRight" style="display: none;">15/03/2021</li>
+            <li>
+                <p id="TimeNow" class="firstItemRight semibold" style="display: block;">Sun 0:00</p>
+            </li>
         </ul>
         <ul class="left-section">
             <a href="#">
             <li>
-                <span class="itemText mainText rightText semibold" id="apple-icon">BigSurBar</span>
+                <span class="itemText mainText rightText bold" id="apple-icon"></span>
                 <div id="itemIcon">
                     <div class="apple-icon"></div>
                 </div>
@@ -74,169 +76,17 @@
         </ul>
     </div>
     <script src="js/jquery-3.6.0.min.js"></script>
-<script src="js/jquery.mobile-1.5.0-alpha.1.min.js"></script>
-<script>
-    function updateTime(){
-        var date = new Date();
-        var weekdays = new Array(7);
-        weekdays[0] = "Sun";
-        weekdays[1] = "Mon";
-        weekdays[2] = "Tue";
-        weekdays[3] = "Wed";
-        weekdays[4] = "Thu";
-        weekdays[5] = "Fri";
-        weekdays[6] = "Sat";
-        var dayName = weekdays[date.getDay()];
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-        minutes = minutes < 10 ? '0'+minutes : minutes;
-        var strTime = hours + ':' + minutes + ' ' + ampm;
-        var Total = dayName + " " + strTime
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        day = day < 10 ? '0'+day : day;
-        month = month < 10 ? '0'+month : month;
-        document.getElementById("TimeNow").innerText = Total;
-        document.getElementById("DateNow").innerText = day + "/" + month + "/" + year;
-    }
-    api.resources.observeData(function (newData) {
-            var bp = newData.battery.percentage;
-            var isCharging = newData.battery.state;
-            if(isCharging == 1){
-                document.getElementById("battery-percentage-icon").classList.add("isCharging");
-            }else{
-                document.getElementById("battery-percentage-icon").classList.remove("isCharging");
-                document.getElementById("battery-percentage-icon").style.width = (parseInt(bp) / 100 * 25).toString() + "px";
-                if(parseInt(bp) <= 15){
-                    document.getElementById("battery-percentage-icon").style.background = "#ff1212";
-                }else{
-                    document.getElementById("battery-percentage-icon").style.background = "";
-                }
-            }
-            document.getElementById('battery-percentage').innerText = bp + "%";
-            
-        });
-        api.comms.observeData(function (newData) {
-            if(newData.telephony.airplaneMode){
-                $("#cellular-signal").show();
-                document.getElementById("cellular-type").innerText = "";
-                document.getElementById("cellular-icon").style.background = "url(img/airplane.png)";
-            }else {
-                if(newData.telephony.type != "" && newData.telephony.operator != ""){
-                // Device supported cellular
-                $("#cellular-signal").show();
-                document.getElementById("cellular-type").innerText = newData.telephony.operator + " " + newData.telephony.type;
-                document.getElementById("cellular-icon").style.background = "url(img/signal" + newData.telephony.bars.toString() +  ".png)";
-                }else{
-                    $("#cellular-signal").hide();
-                }
-            }
-            
-            if(newData.wifi.enabled !== false && newData.wifi.ssid !== ""){
-                $("#wifi-signal").show();
-                document.getElementById("wifi-SSID").innerText = newData.wifi.ssid;
-                document.getElementById("wifi-icon").style.background = "url(img/wifi" + (newData.wifi.bars) +  ".png)";
-            }else{
-                $("#wifi-signal").hide();
-            }
-
-            if(newData.bluetooth.enabled !== false){
-                // Device supported cellular
-                $("#bt-signal").show();
-                if(newData.bluetooth.devices.length > 0){
-                    document.getElementById("bt-icon").style.background = "url(img/bluetooth-connected.png)";
-                }else{
-                    document.getElementById("bt-icon").style.background = "url(img/bluetooth.png)";
-                }
-            }else{
-                $("#bt-signal").hide();
-            }
-        });
-        
-        
-    setInterval(function(){
+    <script src="js/jquery.mobile-1.5.0-alpha.1.min.js"></script>
+    <script src="js/battery.js"></script>
+    <script src="js/communications.js"></script>
+    <script src="js/time.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/config.js"></script>
+    <script>  
         updateTime();
-    },1000)
-    function showDate(){
-        $("#TimeNow").hide();
-        $("#DateNow").fadeIn(150);
-        setTimeout(function(){
-            $("#TimeNow").fadeIn(150);
-            $("#DateNow").hide();
-        }, 2000);
-    }
-</script>
-<script>
-    $(document).ready(function() {
-        var isMuted, lastVol, HideVol;
-        // Cuz fkn jquary replace any range type to its fkn theme xD
-        $(".range-slider__range").attr("type", "range");
-
-        api.media.observeData(function (newData) {
-            $(".range-slider__range").val(newData.volume);
-            
-            if(!newData.isStopped){
-                document.getElementById("music-Name").style.display = "block";
-                document.getElementById("music-Name").innerText = newData.nowPlaying.title;
-            }
-        });
-
-        $(document).on('input', '.range-slider__range', function() {
-            
-            if($(this).val() > 0){
-                isMuted = false;
-                api.media.setVolume($(this).val());
-                document.getElementById("vol-icon").style.background = "url(img/vol.png)";
-            }else{
-                document.getElementById("vol-icon").style.background = "url(img/vol-muted.png)";
-            }
-            clearTimeout(HideVol);
-            HideVol = setTimeout(function(){
-                $(".range-slider").hide(200);
-            }, 5000);
-            
-        });
-        
-        $("#music-item").swiperight(function() {
-            // Previous
-            api.media.previousTrack();
-        });
-        $("#music-item").swipeleft(function() {
-            // Next
-            api.media.nextTrack();
-        });
-        
-        $("#vol-icon").click(function(){
-            if($(".range-slider").is(":visible")){
-                ToggelMute()
-            }else{
-                $(".range-slider").show(200);
-            }
-            clearTimeout(HideVol);
-            HideVol = setTimeout(function(){
-                $(".range-slider").hide(200);
-            }, 5000);
-        });
-        function ToggelMute(){
-            if(isMuted){
-                api.media.setVolume(lastVol);
-                isMuted = false;
-                document.getElementById("vol-icon").style.background = "url(img/vol.png)";
-            }else{
-                lastVol = api.media.volume;
-                api.media.setVolume(0);
-                isMuted = true;
-                document.getElementById("vol-icon").style.background = "url(img/vol-muted.png)";
-            }
-        }
-        
-
-    })
-    
-
-</script>
+        setInterval(function(){
+            updateTime();
+        },1000)
+    </script>
 </body></html>
