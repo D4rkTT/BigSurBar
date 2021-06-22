@@ -8,5 +8,5 @@
 # Manual Install
 - download deb from release page then install it with Filza
 
-## Also as I am not working :"( I accepting donations @ [buymeacoffee](https://www.buymeacoffee.com/darkt)
+## Accepting donations @ [buymeacoffee](https://www.buymeacoffee.com/darkt)
 
