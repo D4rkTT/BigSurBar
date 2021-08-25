@@ -15,7 +15,7 @@ function updateTime(){
     var day = date.getDate();
     var year = date.getFullYear();
     day = day < 10 ? '0' + day : day;
-    FullDate = monthNames[month] + " " + day;
+    FullDate = monthNames[month - 1] + " " + day;
     month = month < 10 ? '0'+month : month;
     GlobalDateTime = dayNames[dayofweek] + "<tab><bold>" + FullDate + "</bold><tab> " + FullTime;
     
